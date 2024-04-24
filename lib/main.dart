@@ -43,10 +43,13 @@ class SplashScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Image.asset(
-              'assets/logo.jpg',
-              width: MediaQuery.of(context).size.width * 0.5,
-            ),
+            Container(
+        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
+        child: Image.asset(
+          'assets/nyala.png',
+          width: MediaQuery.of(context).size.width * 0.3,
+        ),
+      ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.02),
             const Text(
               'Nyala Medical Insurance',

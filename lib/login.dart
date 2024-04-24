@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'benefit.dart';
+
+import 'benefit_individual.dart';
 import 'signup.dart'; // Import the signup page file
 import 'form_validators.dart';
-
+import 'family_registeration.dart';
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -13,24 +14,36 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   bool isHovered = false;
-   bool _showPassword = false;
+  bool _showPassword = false;
 
- 
-
-  void _login() {
+  void _loginAsIndividual() {
+    // Handle individual login
     if (_formKey.currentState!.validate()) {
-      // Perform login/authentication
+      // Perform individual login/authentication
       String email = _emailController.text;
       String password = _passwordController.text;
 
-      // For demonstration, let's print the email and password
-      print('Email: $email');
-      print('Password: $password');
+    
 
-      // Navigate to the benefit page after successful login
+      // Navigate to the individual benefit page after successful login
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => BenefitPage()),
+      );
+    }
+  }
+
+  void _loginAsFamily() {
+    // Handle family login
+    if (_formKey.currentState!.validate()) {
+      // Perform family login/authentication
+      String email = _emailController.text;
+      String password = _passwordController.text;
+
+      
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => FamilyRegistrationPage()),
       );
     }
   }
@@ -50,147 +63,157 @@ class _LoginPageState extends State<LoginPage> {
         title: Text('Login'),
         backgroundColor: Colors.blue,
       ),
-      backgroundColor: Colors.transparent, 
+      backgroundColor: Colors.transparent,
       body: Stack(
-            children: [
-             
-              Positioned.fill(
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Colors.lightBlue.shade200,
-                        Colors.lightBlue.shade400,
-                      ],
-                    ),
-                  ),
-                  child: CustomPaint(
-                    size: Size(MediaQuery.of(context).size.width,
-                        MediaQuery.of(context).size.height / 2),
-                    painter: CurvePainter(),
-                  ),
+        children: [
+          Positioned.fill(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.lightBlue.shade200,
+                    Colors.lightBlue.shade400,
+                  ],
                 ),
               ),
-       Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const Text('Please Log in To Get Medical Covers',
-                style: TextStyle(
-                  color: Colors.blue,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+              child: CustomPaint(
+                size: Size(MediaQuery.of(context).size.width,
+                    MediaQuery.of(context).size.height / 2),
+                painter: CurvePainter(),
               ),
-             TextFormField(
-  controller: _emailController,
-  keyboardType: TextInputType.emailAddress,
-  decoration: InputDecoration(
-    labelText: 'Email',
-    prefixIcon: Icon(Icons.email),
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(15),
-    ),
-    focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(15),
-      borderSide: BorderSide(
-        color: Colors.blue,
-        width: 2.0,
-      ),
-    ),
-  ),
-  validator: validateEmail,
-),
-
-              SizedBox(height: 20),
-             TextFormField(
-  controller: _passwordController,
-  obscureText: !_showPassword,
-  decoration: InputDecoration(
-    labelText: 'Password',
-    prefixIcon: Icon(Icons.lock),
-    suffixIcon: IconButton(
-      icon: Icon(_showPassword ? Icons.visibility : Icons.visibility_off),
-      onPressed: () {
-        setState(() {
-          _showPassword = !_showPassword;
-        });
-      },
-    ),
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(15),
-    ),
-    focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(15),
-      borderSide: BorderSide(
-        color: Colors.blue,
-        width: 2.0,
-      ),
-    ),
-  ),
-  validator: validatePassword,
-),
-
-              SizedBox(height: 20),
-              MouseRegion(
-                onEnter: (_) {
-                  // Called when the mouse pointer enters the button area
-                  setState(() {
-                    isHovered = true;
-                  });
-                },
-                onExit: (_) {
-                  // Called when the mouse pointer exits the button area
-                  setState(() {
-                    isHovered = false;
-                  });
-                },
-                child: SizedBox(
-                  width: double.infinity, // Set the width to match the parent width
-                  child: ElevatedButton(
-                    onPressed: _login,
-                    style: ElevatedButton.styleFrom(
-                      primary: isHovered ? Colors.blue.withOpacity(0.8) : Colors.blue, // Background color
-                      onPrimary: Colors.white, // Text color
-                      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30), // Button padding
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20), // Button border radius
-                      ),
-                      elevation: 5, // Button shadow
-                      shadowColor: Colors.black, // Shadow color
-                    ),
-                    child: Text(
-                      'Login',
-                      style: TextStyle(
-                        fontSize: 18, // Text size
-                        fontWeight: FontWeight.bold, // Text weight
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 10),
-              GestureDetector(
-                onTap: _goToSignUp,
-                child: Text(
-                  'Don\'t have an account? Sign up here',
-                  style: TextStyle(
-                    color: Colors.blue,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
-            ],
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Please Log in To Get Medical Covers',
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  TextFormField(
+                    controller: _emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      labelText: 'Email',
+                      prefixIcon: Icon(Icons.email),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(
+                          color: Colors.blue,
+                          width: 2.0,
+                        ),
+                      ),
+                    ),
+                    validator: validateEmail,
+                  ),
+                  SizedBox(height: 20),
+                  TextFormField(
+                    controller: _passwordController,
+                    obscureText: !_showPassword,
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      prefixIcon: Icon(Icons.lock),
+                      suffixIcon: IconButton(
+                        icon: Icon(_showPassword
+                            ? Icons.visibility
+                            : Icons.visibility_off),
+                        onPressed: () {
+                          setState(() {
+                            _showPassword = !_showPassword;
+                          });
+                        },
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(
+                          color: Colors.blue,
+                          width: 2.0,
+                        ),
+                      ),
+                    ),
+                    validator: validatePassword,
+                  ),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                        onPressed: _loginAsIndividual,
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.blue,
+                          onPrimary: Colors.white,
+                          padding: EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 15),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          elevation: 5,
+                          shadowColor: Colors.black,
+                        ),
+                        child: Text(
+                          'Login as Individual',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: _loginAsFamily,
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.blue,
+                          onPrimary: Colors.white,
+                          padding: EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 15),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          elevation: 5,
+                          shadowColor: Colors.black,
+                        ),
+                        child: Text(
+                          'Login as Family',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  GestureDetector(
+                    onTap: _goToSignUp,
+                    child: Text(
+                      'Don\'t have an account? Sign up here',
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -202,9 +225,8 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 }
-  
 
-  // Custom painter for drawing curves
+// Custom painter for drawing curves
 class CurvePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {

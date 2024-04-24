@@ -9,7 +9,6 @@ class SummaryPage extends StatelessWidget {
       builder: (context, provider, _) {
         double totalPremium = provider.totalPremium;
         List<dynamic> selectedPackages = provider.selectedPackages.toList();
-        List<FamilyMember> familyMembers = provider.familyMembers;
 
         return Scaffold(
           appBar: AppBar(
@@ -112,35 +111,6 @@ class SummaryPage extends StatelessWidget {
                                   const SizedBox(height: 4),
                                 ],
                               ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    const Text(
-                      'Family Members:',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black87,
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: familyMembers.length,
-                        itemBuilder: (context, index) {
-                          final member = familyMembers[index];
-                          return ListTile(
-                            title: Text(
-                              'fullName:${member.firstName} ${member.lastName}',
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            subtitle: Text(
-                              'Age: ${member.age}, Gender: ${member.gender}',
                             ),
                           );
                         },

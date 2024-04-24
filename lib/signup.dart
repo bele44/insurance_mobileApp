@@ -137,7 +137,7 @@ void _signup() async {
               SizedBox(height: 20),
               TextFormField(
                 controller: _confirmPasswordController,
-                obscureText: _showPasswordConfirm,
+                obscureText: !_showPasswordConfirm,
                 decoration: InputDecoration(
                   labelText: 'Confirm Password',
                   prefixIcon: Icon(Icons.lock),

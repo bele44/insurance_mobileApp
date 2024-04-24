@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'summary_page.dart';
+import 'summary_individual.dart';
 import 'selected_package_provider.dart';
 import 'selected_package_model.dart';
 import 'package:provider/provider.dart';
@@ -52,7 +52,6 @@ class _BenefitPageContentState extends State<_BenefitPageContent> {
     try {
       final response = await http.get(Uri.parse(
           'http://192.168.1.6:3000/package'));
-          //'http://157.175.211.34:8196/api/payer/claimconnect/package'));
       if (response.statusCode == 200) {
         final List<dynamic> data = json.decode(response.body);
         categorizePackages(data);

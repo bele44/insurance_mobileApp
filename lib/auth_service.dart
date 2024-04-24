@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'SignUpData.dart';
 class AuthService {
-  static const String baseUrl = 'your-backend-url';
+  static const String baseUrl = 'backend-url';
 
   static Future<bool> signUp(SignUpData signUpData) async {
     final response = await http.post(

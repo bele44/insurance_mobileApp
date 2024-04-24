@@ -1,6 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
+// Model class for family member data
+class FamilyMember {
+  String firstName;
+  String lastName;
+  int age;
+  String gender;
+
+  FamilyMember({
+    required this.firstName,
+    required this.lastName,
+    required this.age,
+    required this.gender,
+  });
+}
+
 class SelectedPackageProvider extends ChangeNotifier {
   Set<dynamic> _selectedPackages = {};
   Map<dynamic, double> _premiums = {};
@@ -69,4 +84,29 @@ class SelectedPackageProvider extends ChangeNotifier {
       _totalPremium += _premiums[package] ?? 0.0;
     });
   }
+
+
+
+
+
+
+  int _selectedFamilySize = 1;
+  List<FamilyMember> _familyMembers = [];
+
+  int get selectedFamilySize => _selectedFamilySize;
+
+  set selectedFamilySize(int value) {
+    _selectedFamilySize = value;
+    notifyListeners();
+  }
+
+  List<FamilyMember> get familyMembers => _familyMembers;
+
+  void addFamilyMember(FamilyMember member) {
+    _familyMembers.add(member);
+    notifyListeners();
+  }
 }
+
+
+
